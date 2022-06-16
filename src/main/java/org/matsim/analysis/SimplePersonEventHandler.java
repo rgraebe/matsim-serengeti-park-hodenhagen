@@ -1,5 +1,8 @@
 package org.matsim.analysis;
 
+import org.apache.commons.lang3.time.DatePrinter;
+import org.apache.commons.lang3.time.DateUtils;
+import org.jfree.date.DateUtilities;
 import org.matsim.api.core.v01.Id;
 import org.matsim.api.core.v01.events.PersonArrivalEvent;
 import org.matsim.api.core.v01.events.PersonDepartureEvent;
@@ -18,9 +21,10 @@ public class SimplePersonEventHandler implements PersonDepartureEventHandler, Pe
 
 //        System.out.println("Departure: " + personDepartureEvent.getTime() + ", " + personDepartureEvent.getPersonId());
 
-        System.out.println("AgentDepartureEvent -- time: " + personDepartureEvent.getTime() +
-                                            " -- linkId: " + personDepartureEvent.getLinkId() +
-                                            " -- personId: " + personDepartureEvent.getPersonId());
+        // todo: better time format... use DateUtils.formatElapsedTime(long)
+//        System.out.println("AgentDepartureEvent -- time: " + personDepartureEvent.getTime() +
+//                                            " -- linkId: " + personDepartureEvent.getLinkId() +
+//                                            " -- personId: " + personDepartureEvent.getPersonId());
 
         // save PersonId and time of departure to use in calculation of travel time
         departureTimeByPerson.put(personDepartureEvent.getPersonId(), personDepartureEvent.getTime());
@@ -32,13 +36,13 @@ public class SimplePersonEventHandler implements PersonDepartureEventHandler, Pe
 
 //        System.out.println("Arrival: " + personArrivalEvent.getTime() + ", " + personArrivalEvent.getPersonId());
 
-        System.out.println("PersonArrivalEvent -- time: " + personArrivalEvent.getTime() +
-                                            " -- linkId: " + personArrivalEvent.getLinkId() +
-                                           " -- personId: " + personArrivalEvent.getPersonId());
+//        System.out.println("PersonArrivalEvent -- time: " + personArrivalEvent.getTime() +
+//                                            " -- linkId: " + personArrivalEvent.getLinkId() +
+//                                           " -- personId: " + personArrivalEvent.getPersonId());
 
         double departureTime = departureTimeByPerson.get(personArrivalEvent.getPersonId());
         double travelTime = personArrivalEvent.getTime() - departureTime;
-        System.out.println("Travel time of person " + personArrivalEvent.getPersonId() + " is " + travelTime + " s.");
+//        System.out.println("Travel time of person " + personArrivalEvent.getPersonId() + " is " + travelTime + " s.");
 
     }
 
